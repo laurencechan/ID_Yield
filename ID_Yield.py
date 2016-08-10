@@ -60,6 +60,7 @@ class ID_Yield():
                         dict_6[i["id"][0:6]] = j.values()[0] + i["place"]
                         lev3_list.append(dict_6)
         xx = random.choice(lev3_list)
+        # print xx.keys()[0],xx.values()[0]
         return xx
 
     @classmethod
@@ -68,6 +69,8 @@ class ID_Yield():
         month = random.randint(1, 12)
         if month == 2 and year % 4 == 0:
             maxday = 29
+        elif month == 2 and year % 4 != 0:
+            maxday = 28
         elif month in [1, 3, 5, 7, 8, 10, 12]:
             maxday = 31
         else:
@@ -92,8 +95,12 @@ class ID_Yield():
     @classmethod
     def combination(self, num):
         for i in range(num):
-            id_num = ID_Yield.get_forhead_six().keys()[0] + ID_Yield.birthday() + ID_Yield.last_four()
-            print id_num, ID_Yield.get_forhead_six().values()[0]
+            forhead_six = ID_Yield.get_forhead_six()
+            forhead_six_num = forhead_six.keys()[0]
+            birthday = ID_Yield.birthday()
+            last_four = ID_Yield.last_four()
+            id_num = forhead_six_num + birthday + last_four
+            print "第%s个" % (i+1), id_num, forhead_six.values()[0]
 
 
 
@@ -106,5 +113,5 @@ if __name__ == '__main__':
     # ID_Yield.get_forhead_six()
     # ID_Yield.birthday()
     # ID_Yield.last_four()
-    ID_Yield.combination(10)
+    ID_Yield.combination(200)
     pass
